@@ -31,6 +31,36 @@ def plot_series(time, series, title, format="-", start=0, end=None):
     plt.grid(True)              # Overlay a grid on the graph    
     plt.show()                  # Draw the graph on screen
 # =============================================================================================
+def plot_series_2(x, y, format="-", start=0, end=None, 
+                title=None, xlabel=None, ylabel=None, legend=None ):
+    """
+    Visualizes time series data
+
+    Args:
+      x (array of int) - contains values for the x-axis
+      y (array of int or tuple of arrays) - contains the values for the y-axis
+      format (string) - line style when plotting the graph
+      start (int) - first time step to plot
+      end (int) - last time step to plot
+      title (string) - title of the plot
+      xlabel (string) - label for the x-axis
+      ylabel (string) - label for the y-axis
+      legend (list of strings) - legend for the plot
+    """  
+    plt.figure(figsize=(10, 6))     # Setup dimensions of the graph figure
+    if type(y) is tuple:    # Check if there are more than two series to plot      
+      for y_curr in y:      # Loop over the y elements        
+        plt.plot(x[start:end], y_curr[start:end], format) # Plot the x and current y values
+    else:      
+      plt.plot(x[start:end], y[start:end], format)    # Plot the x and y values    
+    plt.xlabel(xlabel)    # Label the x-axis    
+    plt.ylabel(ylabel)    # Label the y-axis    
+    if legend:            # Set the legend
+      plt.legend(legend)    
+    plt.title(title)      # Set the title    
+    plt.grid(True)        # Overlay a grid on the graph    
+    plt.show()            # Draw the graph on screen
+# =============================================================================================
 def trend(time, slope=0):
     """
     Generates synthetic data that follows a straight line given a slope value.
